@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Cats from './Cats'
 import NewCat from './NewCat'
 import About from './About'
+
 export default class NavBar extends Component {
     render(){
         return(
@@ -31,11 +32,15 @@ export default class NavBar extends Component {
   </div>
 </nav>
 <Switch>
-    <Route  exact path='/cats' render={(props) => <Cats cats={this.props.cats}/>}/>
+<Route  exact path='/cats' render={(props) => <Cats
+    cats={this.props.cats}
+    deleteCat = {this.props.deleteCat}
+    updateCat = {this.props.updateCat}
+    />}/>
     <Route exact path='/newcat' render={(props) => <NewCat clickFunc ={this.props.newCat}/>} />
     <Route path='/about' component = {About}/>
     <Route path='/'/>
-</Switch>
+    </Switch>
 </Router>
         )
     }

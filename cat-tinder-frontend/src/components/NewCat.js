@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {
-     ListGroup, Form, Alert
+      Form
 } from 'react-bootstrap'
-import {Input} from 'reactstrap'
+
 export default class NewCat extends Component {
     constructor(props){
         super(props)
@@ -12,8 +12,7 @@ export default class NewCat extends Component {
                 name: '',
                 age:'',
                 enjoys: ''
-            },
-            isValid: false
+            }
         }
     }
 
@@ -22,34 +21,37 @@ export default class NewCat extends Component {
         form[event.target.name] = event.target.value
         this.setState({form:form})
     }
-    newCatClick = () => {
-        console.log(this.state.form);
-        let {form} = this.state
-        if (this.validateFields()) {
-            this.props.clickFunc(this.state.form)
-            let emptyForm = {
-                id: '',
-                name: '',
-                age:'',
-                enjoys:''
-            }
-            this.setState({form: emptyForm})
-            this.setState({isValid:false})
-        }
-
+    // newCatClick = () => {
+    //     console.log(this.state.form);
+    //     let {form} = this.state
+    //     if (this.validateFields()) {
+    //         this.props.clickFunc(this.state.form)
+    //
+    //         this.setState({isValid:false})
+    //     }
+    //
+    // }
+    // validateFields = () => {
+    //     let valid = this.state.isValid
+    //     if (this.state.form.name ==='' || this.state.form.age ==='' || this.state.form.enjoys ==='') {
+    //         valid = false
+    //     }
+    //     else  {
+    //         valid = true
+    //     }
+    //     this.setState({isValid:valid})
+    //     return valid
+    // }
+    handleClick = () => {
+        this.props.clickFunc(this.state.form)
+        let emptyForm = {
+                    id: '',
+                    name: '',
+                    age:'',
+                    enjoys:''
+                }
+        this.setState({form: emptyForm})
     }
-    validateFields = () => {
-        let valid = this.state.isValid
-        if (this.state.form.name ==='' || this.state.form.age ==='' || this.state.form.enjoys ==='') {
-            valid = false
-        }
-        else  {
-            valid = true
-        }
-        this.setState({isValid:valid})
-        return valid
-    }
-
     render(){
         return(
 <div>
@@ -62,7 +64,6 @@ export default class NewCat extends Component {
           name = 'name'
           onChange = {this.handleChange}
           value ={this.state.form.name}
-          required
           />
     </Form.Group>
 
@@ -73,7 +74,6 @@ export default class NewCat extends Component {
       name = 'age'
       onChange = {this.handleChange}
       value ={this.state.form.age}
-      required = 'required'
       />
     </Form.Group>
     <Form.Group>
@@ -85,7 +85,7 @@ export default class NewCat extends Component {
       value ={this.state.form.enjoys}
       />
     </Form.Group>
-    <button className="btn btn-primary" onClick ={this.newCatClick} >Submit </button>
+    <button className="btn btn-primary" onClick ={this.handleClick}>Submit </button>
   </fieldset>
   </div>
         )
