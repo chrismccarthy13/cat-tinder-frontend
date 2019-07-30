@@ -1,0 +1,20 @@
+#cats-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin: 0 40px;
+}
+
+#cat-card {
+    width: 200px;
+    min-height: 300px;
+    border: 2px solid black;
+
+}
+#list-cats{
+    font-weight: bold;
+}
+.list-group-item{
+    margin: 5px;
+    box-shadow: 5px 10px 18px #181818;
+}
