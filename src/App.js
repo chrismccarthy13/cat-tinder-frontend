@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import {getCats, createCat, showCat, deleteCat} from './api/index'
+import {getCats, createCat, showCat, deleteCat, updateCat} from './api/index'
 import NavBar from './components/NavBar'
 
 
@@ -10,24 +10,7 @@ class App extends Component {
         this.state = {
             // cats: []
             cats: [
-        {
-          id: 1,
-          name: 'Morris',
-          age: 2,
-          enjoys: "Long walks on the beach."
-        },
-        {
-          id: 2,
-          name: 'Paws',
-          age: 4,
-          enjoys: "Snuggling by the fire."
-        },
-        {
-          id: 3,
-          name: 'Mr. Meowsalot',
-          age: 12,
-          enjoys: "Being in charge."
-        }
+
       ]
         }
     }
@@ -43,22 +26,19 @@ class App extends Component {
     handleNewCat = (newCatInfo) => {
         let catList = this.state.cats
         createCat(newCatInfo)
-            .then(successCat => {
-                // if (successCat.name !== 'Error') {
-                //     catList.push(successCat)
-                //     this.setState({cats:catList})
-                // }
-            })
+        .then( successCat => {
+        getCats().then(APIcats => {
+            this.setState({cats:APIcats})
+        })})
     }
     handleDelete = (id) => {
         deleteCat(id)
-
+        .then( successCat => {
+        getCats().then(APIcats => {
+            this.setState({cats:APIcats})
+        })})
     }
-    componentDidUpdate = (cat) => {
-          getCats(cat).then(APIcats => {
-              this.setState({cats:APIcats})
-          })
-	    }
+
 
     render(){
       return (

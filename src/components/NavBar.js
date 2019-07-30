@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Cats from './Cats'
+import OneCat from './OneCat'
 import NewCat from './NewCat'
 import About from './About'
 
@@ -41,6 +42,7 @@ export default class NavBar extends Component {
                     deleteCat = {this.props.deleteCat}
                     updateCat = {this.props.updateCat}
                     />}/>
+                    <Route exact path = '/cats/:id' component = {OneCat} />
                     <Route exact path='/newcat' render={(props) => <NewCat clickFunc ={this.props.newCat}/>} />
                     <Route path='/about' component = {About}/>
                     <Route path='/'/>

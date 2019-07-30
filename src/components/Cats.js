@@ -4,32 +4,23 @@ import {
 } from 'react-bootstrap'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import OneCat from './OneCat'
+import '../App.css'
 export default class Cats extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
 
-        }
-    }
     handleDelete = (id) =>{
         this.props.deleteCat(id)
     }
     render() {
         return(
-          <div>
+          <div id ='cat'>
             <br/><br/><br/>
-            <Router>
-            <Switch>
-            <Route exact path= {`/cats/:id`} component={OneCat}/ >
+
             // <Route exact path ={`/cats/:id`} component={() => <OneCat changeCat = {this.props.updateCat}/>} />
-            <Container>
-            <Row>
-                <Col xs={12}>
-                <ListGroup>
+                <ListGroup id="cats-container">
                 {this.props.cats.map((cat, index) =>{
                   return (
-                    <ListGroup.Item key={index}>
-                    <div class="card bg-light mb-3">
+                    <ListGroup.Item key={index} id='list-cats'>
+                    <div id='cat-card' className="card bg-light mb-3">
                       <h4 class="card-header bg-light">
                         <Link to={`/cats/${cat.id}`} className='nav-link'>
                           <span className='cat-name text-info'>{cat.name}</span>
@@ -47,12 +38,6 @@ export default class Cats extends Component {
                     )
                   })}
                 </ListGroup>
-                </Col>
-                </Row>
-            </Container>
-            <Route path= {`/cats`} component={Cats} />
-            </Switch>
-            </Router>
           </div>
         )
     }

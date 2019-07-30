@@ -48,9 +48,24 @@ let createCat = (cat) => {
 
         })
 }
-let updateCat = (cat) => {
-
+let updateCat = (id, cat) => {
+	console.log('cat from the update cat method in index js');
+	console.log(id);
+	return fetch(BASE + `/cats/${id}`, {
+		body: JSON.stringify({cat:cat}),
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		method: "PUT",
+	})
+		.then((resp) => {
+			if (resp.ok) {
+				let json = resp.json()
+				return json
+			}
+		})
 }
+
 export  {
 	getCats,
     createCat,

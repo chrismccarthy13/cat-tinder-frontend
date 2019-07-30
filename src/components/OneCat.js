@@ -49,8 +49,11 @@ export default class OneCat extends Component {
         form[event.target.name] = event.target.value
         this.setState({form:form})
     }
-    handleClick = () => {
-        console.log(this.state.form);
+    handleClick = (id) => {
+        updateCat(id, this.state.form)
+        showCat(id).then(APIcats => {
+            this.setState({cat:APIcats})
+        })
         let emptyForm = {
                     id: '',
                     name: '',
@@ -59,12 +62,13 @@ export default class OneCat extends Component {
                 }
         this.setState({form: emptyForm})
     }
+
     render() {
         return(
             <div>
               <br/><br/><br/>
               <fieldset class="text-light w-50 p-3 mx-auto">
-                <legend class="font-weight-bold">Create a new cat</legend>
+                <legend class="font-weight-bold">Update the cat</legend>
                 <hr class="my-4" />
                 <Form.Group>
                     <Form.Label>Name:</Form.Label>
@@ -94,11 +98,12 @@ export default class OneCat extends Component {
                   value ={this.state.form.enjoys}
                   />
                 </Form.Group>
-                <button className="btn btn-dark" onClick ={this.handleClick}>Submit </button>
+                <button className="btn btn-dark" onClick ={this.handleClick.bind(this,this.state.cat.id)}>Submit </button>
               </fieldset>
-            <div id='result'>
-                <h5>Cat Id: {this.state.cat.id} </h5>
-                <h5>Cat name: {this.state.cat.name} </h5>
+              <br/>
+            <div id='result' class="card bg-light mb-3 w-50 p-3 mx-auto">
+                <h5 class="card-header bg-light">Cat Id: {this.state.cat.id} </h5>
+                <h5 >Cat name: {this.state.cat.name} </h5>
                 <h5>Cat age: {this.state.cat.age} </h5>
                 <h5>Cat enjoys: {this.state.cat.enjoys} </h5>
             </div>
